@@ -1,0 +1,1 @@
+web: java $JAVA_OPTS -jar EcommeceApplication/target/endorsed/webapp-runner.jar --port $PORT EcommeceApplication/target/*.war
