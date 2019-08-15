@@ -34,7 +34,7 @@ pipeline {
         }
         stage('Getway_Cluster') {
           steps {
-            bat(script: 'AdminControl.getNode()', returnStdout: true)
+            tool 'was-builder'
           }
         }
       }
