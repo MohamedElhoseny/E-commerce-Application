@@ -34,7 +34,7 @@ pipeline {
         }
         stage('Getway_Cluster') {
           steps {
-            powershell(script: 'docker --version', returnStdout: true)
+            powershell(script: 'docker --version', returnStdout: true, returnStatus: true)
           }
         }
       }
