@@ -26,8 +26,17 @@ pipeline {
       }
     }
     stage('Deploy') {
-      steps {
-        echo 'Hello in Deploy Stage'
+      parallel {
+        stage('Deploy') {
+          steps {
+            echo 'Hello in Deploy Stage'
+          }
+        }
+        stage('Getway_Cluster') {
+          steps {
+            bat(script: 'AdminControl.getNode()', returnStdout: true)
+          }
+        }
       }
     }
   }
