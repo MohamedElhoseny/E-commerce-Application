@@ -35,6 +35,7 @@ pipeline {
         stage('Getway_Cluster') {
           steps {
             powershell(script: 'docker --version', returnStdout: true, returnStatus: true)
+            tool(name: 'wsadmin', type: 'print Help.AdminApp()')
           }
         }
       }
