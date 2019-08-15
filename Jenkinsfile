@@ -34,7 +34,7 @@ pipeline {
         }
         stage('Getway_Cluster') {
           steps {
-            powershell(script: 'docker --version', returnStdout: true, returnStatus: true)
+            AdminApp.update(appName,'app','[-operation update -cluster '+clusterName+' -contextroot '+context_root+' -contents '+app_filepath+'   -usedefaultbindings -nopreCompileJSPs -distributeApp -nouseMetaDataFromBinary -createMBeansForResources ]')
           }
         }
       }
