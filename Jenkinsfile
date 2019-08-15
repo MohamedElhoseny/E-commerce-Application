@@ -26,17 +26,8 @@ pipeline {
       }
     }
     stage('Deploy') {
-      parallel {
-        stage('Deploy') {
-          steps {
-            echo 'Hello in Deploy Stage'
-          }
-        }
-        stage('Getway_Cluster') {
-          steps {
-            sh 'print Help.AdminControl()'
-          }
-        }
+      steps {
+        echo 'Hello in Deploy Stage'
       }
     }
   }
