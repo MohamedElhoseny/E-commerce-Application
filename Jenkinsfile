@@ -1,11 +1,16 @@
 pipeline {
   agent any
+  tools {
+        maven 'apache-maven-3.0.1' 
+    }
+  
   stages {
     stage('Build') {
       parallel {
         stage('Build') {
           steps {
             echo 'Hello in Build Stage'
+			sh 'mvn --version'
           }
         }
         stage('Module 1') {
