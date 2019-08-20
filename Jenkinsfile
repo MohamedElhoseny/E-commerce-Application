@@ -33,8 +33,8 @@ pipeline {
           }
         }
         stage('Getway_Cluster') {
-          steps {
-           
+          steps {        
+
           }
         }
       }
