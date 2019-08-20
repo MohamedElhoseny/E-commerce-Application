@@ -30,6 +30,7 @@ pipeline {
         stage('Deploy') {
           steps {
             echo 'Hello in Deploy Stage'
+            powershell(script: 'wsadmin -language jython -f path/to/your/jython/file.py', returnStatus: true, returnStdout: true)
           }
         }
       }
