@@ -31,7 +31,7 @@ pipeline {
         stage('Deploy') {
           steps {
             echo 'Sending files by FTP'
-			ftpPublisher alwaysPublishFromMaster: false, continueOnError: false, failOnError: false, publishers: [[configName: 'myFileZillaServer', transfers: [[asciiMode: false, cleanRemote: false, excludes: '', flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'scripts/*.*']], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false]]
+	    ftpPublisher alwaysPublishFromMaster: false, continueOnError: false, failOnError: false, publishers: [[configName: 'myFileZillaServer', transfers: [[asciiMode: false, cleanRemote: false, excludes: '', flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'scripts/*.*']], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false]]
           }
         }
       }
