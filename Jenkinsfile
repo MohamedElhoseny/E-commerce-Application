@@ -32,11 +32,6 @@ pipeline {
             echo 'Hello in Deploy Stage'
           }
         }
-        stage('Getway_Cluster') {
-          steps {        
-
-          }
-        }
       }
     }
   }
