@@ -30,7 +30,7 @@ pipeline {
         stage('Deploy') {
           steps {
             echo 'Hello in Deploy Stage'
-            powershell(script: 'wsadmin -language jython -f path/to/your/jython/file.py', returnStatus: true, returnStdout: true)
+            powershell(script: 'AdminApp.update(appName,\'app\',\'[-operation update -cluster \'+clusterName+\' -contextroot \'+context_root+\' -contents \'+app_filepath+\' -usedefaultbindings -nopreCompileJSPs -distributeApp -nouseMetaDataFromBinary -createMBeansForResources ]\')', returnStatus: true, returnStdout: true)
           }
         }
       }
