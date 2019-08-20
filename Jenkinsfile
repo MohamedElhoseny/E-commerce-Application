@@ -1,15 +1,12 @@
 pipeline {
   agent any
-  tools {
-        maven 'apache-maven-3.0.1' 
-    }
+  
   stages {
     stage('Build') {
       parallel {
         stage('Build') {
           steps {
             echo 'Hello in Build Stage'
-			sh 'mvn --version'
           }
         }
         stage('Module 1') {
@@ -33,7 +30,8 @@ pipeline {
       parallel {
         stage('Deploy') {
           steps {
-            echo 'Hello in Deploy Stage'       
+            echo 'Sending files by FTP'
+			ftpPublisher alwaysPublishFromMaster: false, continueOnError: false, failOnError: false, publishers: [[configName: 'myFileZillaServer', transfers: [[asciiMode: false, cleanRemote: false, excludes: '', flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/', remoteDirectorySDF: false, removePrefix: '', sourceFiles: 'scripts/*.*']], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false]]
           }
         }
       }
