@@ -1,6 +1,5 @@
+def workspace
 pipeline {
-  def workspace
-  
   agent any
   stages {
     stage('checkout code') {
