@@ -1,7 +1,6 @@
 def workspace
-pipeline {
-  agent any
-  stages {
+node{
+
     stage('checkout code') {
 	  steps {   
 			 //checkout git repository
@@ -11,11 +10,13 @@ pipeline {
 			workspace = pwd()
 	  }
     }
+	
     stage('Compile Code') {
       steps {
 	   build job: 'CompileCodeJob', parameters: [string(name: 'workspace', value: workspace)]
       }
     }
+	
     stage('Copy Resources') {
       parallel {
         stage('Copy Resources') {
@@ -30,6 +31,7 @@ pipeline {
         }
       }
     }
+	
     stage('Database') {
       parallel {
         stage('Database') {
@@ -44,10 +46,11 @@ pipeline {
         }
       }
     }
+	
     stage('Deploy') {
       steps {
         build job: 'DeployEARJob', parameters: [string(name: 'workspace', value: workspace)]
       }
     }
-  }
+  
 }
