@@ -14,27 +14,17 @@ node{
     }
 	
     stage('Copy Resources') {
-      parallel {
-        stage('Copy Resources') {
-            build job: 'CopyResourcesJob', parameters: [string(name: 'workspace', value: workspace)]
-        }
-        stage('External Lib') {
+        build job: 'CopyResourcesJob', parameters: [string(name: 'workspace', value: workspace)]
+    }
+	
+    stage('Add External Lib') {
             build job: 'ExternalLibsJob', parameters: [string(name: 'workspace', value: workspace)]
-        }
-      }
     }
-	
-    stage('Database') {
-      parallel {
-        stage('Database') {
-            echo 'Running Database Scripts'
-        }
-        stage('Run Scripts Files') {
-            build job: 'DatabaseScriptsJob', parameters: [string(name: 'workspace', value: workspace)]      
-        }
-      }
+   
+    stage('Run Database Scripts') {
+        build job: 'DatabaseScriptsJob', parameters: [string(name: 'workspace', value: workspace)]      
     }
-	
+      
     stage('Deploy') {
         build job: 'DeployEARJob', parameters: [string(name: 'workspace', value: workspace)]     
     }
