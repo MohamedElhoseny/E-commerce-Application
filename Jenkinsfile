@@ -3,28 +3,28 @@ pipeline {
   
   agent any
   stages {
-	stage('checkout code') {
-	    //checkout git repository
-		checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '7602f122-deeb-4dd5-a93c-6800443cf3c5', url: 'https://github.com/MohamedElhoseny/E-commerce-Application.git']]])
+    stage('checkout code') {
+	 //checkout git repository
+	checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[credentialsId: '7602f122-deeb-4dd5-a93c-6800443cf3c5', url: 'https://github.com/MohamedElhoseny/E-commerce-Application.git']]])
 		
-		//assign current directory to the global variable
-		workspace = pwd()
+	//assign current directory to the global variable
+	workspace = pwd()
     }
     stage('Compile Code') {
       steps {
-        build 'CompileCodeJob'
+	   build job: 'CompileCodeJob', parameters: [string(name: 'workspace', value: workspace)]
       }
     }
     stage('Copy Resources') {
       parallel {
         stage('Copy Resources') {
           steps {
-            build 'CopyResourcesJob'
+            build job: 'CopyResourcesJob', parameters: [string(name: 'workspace', value: workspace)]
           }
         }
         stage('External Lib') {
           steps {
-            build 'ExternalLibsJob'
+            build job: 'ExternalLibsJob', parameters: [string(name: 'workspace', value: workspace)]
           }
         }
       }
@@ -38,14 +38,14 @@ pipeline {
         }
         stage('Run Scripts Files') {
           steps {
-            build 'DatabaseScriptsJob'
+            build job: 'DatabaseScriptsJob', parameters: [string(name: 'workspace', value: workspace)]
           }
         }
       }
     }
     stage('Deploy') {
       steps {
-        build 'DeployEARJob'
+        build job: 'DeployEARJob', parameters: [string(name: 'workspace', value: workspace)]
       }
     }
   }
